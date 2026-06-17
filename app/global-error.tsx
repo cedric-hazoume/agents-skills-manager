@@ -1,19 +1,33 @@
-'use client'
+"use client";
 
 export default function GlobalError({
   error,
-  reset
+  reset,
 }: {
-  error: Error & { digest?: string }
-  reset: () => void
+  error: Error & { digest?: string };
+  reset: () => void;
 }) {
   return (
-    //global-error must include html and body tags
     <html>
       <body>
-        <h1>Something went wrong</h1>
-        <button onClick={reset}>Try again</button>
+        <div className="min-h-[50vh] flex items-center justify-center p-4">
+          <div className="text-center">
+            <div className="text-6xl mb-4">😵</div>
+            <h2 className="text-2xl font-bold mb-2">Something went wrong!</h2>
+            <p className="text-base-content/70 mb-4">
+              {error.message || "An unexpected error occurred"}
+            </p>
+            <div className="flex gap-4 justify-center">
+              <button onClick={() => reset()} className="btn btn-primary">
+                Try again
+              </button>
+              <a href="/" className="btn btn-ghost">
+                Go home
+              </a>
+            </div>
+          </div>
+        </div>
       </body>
     </html>
-  )
+  );
 }
